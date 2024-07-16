@@ -45,3 +45,13 @@ class Users:
             del self.users[user_id]
         else:
             print(f"User {user_id} does not exist.")
+
+    # implemented a method to add a friend to an existing user
+    def add_friend(self, user_id, friend_id):
+        user = self.get_user(user_id)
+        friend = self.get_user(friend_id)
+        if user and friend:
+            user.add_friend(friend_id)
+            friend.add_friend(user_id)
+        else:
+            print("One or both users do not exist.")
