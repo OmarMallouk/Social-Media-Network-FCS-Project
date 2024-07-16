@@ -55,3 +55,13 @@ class Users:
             friend.add_friend(user_id)
         else:
             print("One or both users do not exist.")
+
+     #a method to remove a friend by id 
+    def remove_friend(self, user_id, friend_id):
+        user = self.get_user(user_id)
+        friend = self.get_user(friend_id)
+        if user and friend:
+            user.remove_friend(friend_id)
+            friend.remove_friend(user_id)
+        else:
+            print("One or both users do not exist.")
