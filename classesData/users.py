@@ -69,7 +69,10 @@ class Users:
         else:
             print(f"User {user_id} does not exist.")
             return []
+        
+    #All users
+    def get_all_users(self):
+        return [user for user in self.users.values()]
 
     def __repr__(self):
         return f"Users(users={self.users})"
-
