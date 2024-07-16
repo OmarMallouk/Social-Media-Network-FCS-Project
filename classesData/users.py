@@ -34,3 +34,14 @@ class Users:
             self.users[user_id] = User(user_id, name, email, age)
         else:
             print(f"User {user_id} already exists.")
+
+    # method to get user by id
+    def get_user(self, user_id):
+        return self.users.get(user_id, None)
+
+    # method to remove a user by id
+    def remove_user(self, user_id):
+        if user_id in self.users:
+            del self.users[user_id]
+        else:
+            print(f"User {user_id} does not exist.")
