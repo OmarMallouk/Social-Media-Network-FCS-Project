@@ -34,3 +34,7 @@ class Graph:
         else:
             print(f"User {user_id} does not exist in the graph.")
             return []
+        
+    def __repr__(self):
+        """Return a string representation of the graph."""
+        return f"Graph({self.graph})"
