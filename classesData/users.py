@@ -20,7 +20,19 @@ class Users:
 
     # method to get user by id
     def get_user(self, user_id):
-        return self.users.get(user_id, None)
+        user = self.users.get(user_id, None)
+        if user:
+            user_names = {
+                "user_id": user["user_id"],
+                "name": user["name"],
+                "email": user["email"],
+                "age": user["age"],
+                "friends": [self.users[friend_id]["name"] for friend_id in user["friends"]]
+            }
+            return user_names
+        else:
+            print(f"User {user_id} does not exist.")
+            return None
 
     # method to remove a user by id
     def remove_user(self, user_id):
@@ -34,8 +46,8 @@ class Users:
         user = self.get_user(user_id)
         friend = self.get_user(friend_id)
         if user and friend:
-            user["friends"].add(friend_id)
-            friend["friends"].add(user_id)
+            self.users[user_id]["friends"].add(friend_id)
+            self.users[friend_id]["friends"].add(user_id)
         else:
             print("One or both users do not exist.")
 
@@ -44,8 +56,8 @@ class Users:
         user = self.get_user(user_id)
         friend = self.get_user(friend_id)
         if user and friend:
-            user["friends"].discard(friend_id)
-            friend["friends"].discard(user_id)
+            self.users[user_id]["friends"].discard(friend_id)
+            self.users[friend_id]["friends"].discard(user_id)
         else:
             print("One or both users do not exist.")
     
@@ -53,12 +65,11 @@ class Users:
     def get_friends(self, user_id):
         user = self.get_user(user_id)
         if user:
-            return list(user["friends"])
+           return user["friends"]
         else:
             print(f"User {user_id} does not exist.")
             return []
 
     def __repr__(self):
         return f"Users(users={self.users})"
-
 
