@@ -21,3 +21,16 @@ class Graph:
             self.graph[user_id2]["friends"].add(user_id1)
         else:
             print(f"One or both users ({user_id1}, {user_id2}) do not exist in the graph.")
+
+    
+    def get_users(self):
+        """Return a list of all users in the graph."""
+        return [(user_id, self.graph[user_id]["name"]) for user_id in self.graph]
+
+    def get_friends(self, user_id):
+        """Return a list of friends for a given user."""
+        if user_id in self.graph:
+            return [(friend_id, self.graph[friend_id]["name"]) for friend_id in self.graph[user_id]["friends"]]
+        else:
+            print(f"User {user_id} does not exist in the graph.")
+            return []
