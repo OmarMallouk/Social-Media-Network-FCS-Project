@@ -39,6 +39,21 @@ class Graph:
             print(f"One or both users ({user_id1}, {user_id2}) do not exist in the graph.")
 
     
+    def remove_friendship(self, user_id1, user_id2):
+
+        """Remove a friendship between two users."""
+
+        if user_id1 in self.users and user_id2 in self.users:
+
+            self.users[user_id1]["friends"].discard(user_id2)
+
+            self.users[user_id2]["friends"].discard(user_id1)
+
+        else:
+
+            print(f"One or both users ({user_id1}, {user_id2}) do not exist in the graph.")
+
+
     def get_users(self):
         """Return a list of all users in the graph."""
         return [(user_id, self.graph[user_id]["name"]) for user_id in self.graph]
