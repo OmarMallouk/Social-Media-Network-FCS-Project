@@ -56,12 +56,12 @@ class Graph:
 
     def get_users(self):
         """Return a list of all users in the graph."""
-        return [(user_id, self.graph[user_id]["name"]) for user_id in self.graph]
+        return [(user_id, self.users[user_id]["name"]) for user_id in self.users]
 
     def get_friends(self, user_id):
         """Return a list of friends for a given user."""
-        if user_id in self.graph:
-            return [(friend_id, self.graph[friend_id]["name"]) for friend_id in self.graph[user_id]["friends"]]
+        if user_id in self.users:
+            return [(friend_id, self.users[friend_id]["name"]) for friend_id in self.users[user_id]["friends"]]
         else:
             print(f"User {user_id} does not exist in the graph.")
             return []
