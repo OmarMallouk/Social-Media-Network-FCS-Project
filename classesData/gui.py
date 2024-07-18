@@ -17,7 +17,7 @@ class SocialNetworkApp:
         self.frame = Frame(root)
         self.frame.pack()
 
-        # User Section
+       # User Section
         Label(self.frame, text="User ID").grid(row=0, column=0)
         self.user_id_entry = Entry(self.frame)
         self.user_id_entry.grid(row=0, column=1)
@@ -49,15 +49,15 @@ class SocialNetworkApp:
         self.weight_entry = Entry(self.frame)
         self.weight_entry.grid(row=7, column=1)
 
-        Button(self.frame, text="Add Friendship", command=self.add_friendship).grid(row=7, column=0, columnspan=2)
+        Button(self.frame, text="Add Friendship", command=self.add_friendship).grid(row=8, column=0, columnspan=2)
 
         # Display Section
-        Button(self.frame, text="Display Users", command=self.display_users).grid(row=8, column=0, columnspan=2)
+        Button(self.frame, text="Display Users", command=self.display_users).grid(row=9, column=0, columnspan=2)
         self.output_text = Text(self.frame, height=10, width=40)
-        self.output_text.grid(row=9, column=0, columnspan=2)
+        self.output_text.grid(row=10, column=0, columnspan=2)
 
-         # Graph Visualization Section
-        Button(self.frame, text="Show Network Graph", command=self.show_network_graph).grid(row=10, column=0, columnspan=2)
+        # Graph Visualization Section
+        Button(self.frame, text="Show Network Graph", command=self.show_network_graph).grid(row=11, column=0, columnspan=2)
 
     def add_user(self):
          try:

@@ -44,11 +44,8 @@ class Users:
 
     # implemented a method to add a friend to an existing user
     def add_friend(self, user_id, friend_id):
-        user = self.get_user(user_id)
-        friend = self.get_user(friend_id)
-        if user and friend:
-            self.users[user_id]["friends"].add(friend_id)
-            self.users[friend_id]["friends"].add(user_id)
+        if user_id in self.users and friend_id in self.users:
+            self.users[user_id]['friends'].add(friend_id)
         else:
             print("One or both users do not exist.")
 
