@@ -45,6 +45,10 @@ class SocialNetworkApp:
         self.user_id2_entry = Entry(self.frame)
         self.user_id2_entry.grid(row=6, column=1)
 
+        Label(self.frame, text="Weight").grid(row=7, column=0)
+        self.weight_entry = Entry(self.frame)
+        self.weight_entry.grid(row=7, column=1)
+
         Button(self.frame, text="Add Friendship", command=self.add_friendship).grid(row=7, column=0, columnspan=2)
 
         # Display Section
@@ -83,6 +87,7 @@ class SocialNetworkApp:
         try:
             user_id1 = int(self.user_id1_entry.get())
             user_id2 = int(self.user_id2_entry.get())
+            weight = float(self.weight_entry.get())
 
             if not self.user_manager.get_user(user_id1):
                 messagebox.showerror("Error", f"User ID {user_id1} does not exist.")
@@ -96,10 +101,10 @@ class SocialNetworkApp:
                 messagebox.showerror("Error", "A user cannot be friends with themselves.")
                 return
 
-            self.user_manager.add_friend(user_id1, user_id2)
-            self.social_network.add_friendship(user_id1, user_id2)
+            #self.user_manager.add_friend(user_id1, user_id2)
+            self.social_network.add_friendship(user_id1, user_id2, weight)
             
-            messagebox.showinfo("Success", f"Friendship added between User {user_id1} and User {user_id2}")
+            messagebox.showinfo("Success", f"Friendship added between User {user_id1} and User {user_id2} with weight {weight}")
         except ValueError:
             messagebox.showerror("Error", "Invalid input. Please enter valid user IDs.")
 
