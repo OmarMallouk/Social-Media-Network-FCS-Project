@@ -51,29 +51,58 @@ class SocialNetworkApp:
         self.output_text.grid(row=9, column=0, columnspan=2)
 
     def add_user(self):
-        user_id = int(self.user_id_entry.get())
-        name = self.name_entry.get()
-        email = self.email_entry.get()
-        age = int(self.age_entry.get())
+         try:
+             
+             user_id = int(self.user_id_entry.get())
+             name = self.name_entry.get()
+             email = self.email_entry.get()
+             age = int(self.age_entry.get())
+
+             if self.user_manager.get_user(user_id):
+                messagebox.showerror("Error", f"User ID {user_id} already exists.")
+                return
+             
+             self.user_manager.add_user(user_id, name, email, age)
+             self.social_network.add_user(user_id, name)
+            
+             messagebox.showinfo("Success", f"User {name} added successfully!")
+         except ValueError:
+             messagebox.showerror("Error", "Invalid input. Please enter valid data.")
 
         
-        self.user_manager.add_user(user_id, name, email, age)
-        self.social_network.add_user(user_id, name)
+       
         
-        messagebox.showinfo("Success", f"User {name} added successfully!")
+      
 
     def add_friendship(self):
-        user_id1 = int(self.user_id1_entry.get())
-        user_id2 = int(self.user_id2_entry.get())
+        try:
+            user_id1 = int(self.user_id1_entry.get())
+            user_id2 = int(self.user_id2_entry.get())
 
-        self.user_manager.add_friend(user_id1, user_id2)
-        self.social_network.add_friendship(user_id1, user_id2)
-        
-        messagebox.showinfo("Success", f"Friendship added between User {user_id1} and User {user_id2}")
+            if not self.user_manager.get_user(user_id1):
+                messagebox.showerror("Error", f"User ID {user_id1} does not exist.")
+                return
+
+            if not self.user_manager.get_user(user_id2):
+                messagebox.showerror("Error", f"User ID {user_id2} does not exist.")
+                return
+
+            if user_id1 == user_id2:
+                messagebox.showerror("Error", "A user cannot be friends with themselves.")
+                return
+
+            self.user_manager.add_friend(user_id1, user_id2)
+            self.social_network.add_friendship(user_id1, user_id2)
+            
+            messagebox.showinfo("Success", f"Friendship added between User {user_id1} and User {user_id2}")
+        except ValueError:
+            messagebox.showerror("Error", "Invalid input. Please enter valid user IDs.")
 
     def display_users(self):
         self.output_text.delete(1.0, END)
         users = self.social_network.get_users()
+        if not users:
+            self.output_text.insert(END, "No users in the network.\n")
         for user in users:
             self.output_text.insert(END, f"User: {user[1]} (ID: {user[0]})\n")
             friends = self.social_network.get_friends(user[0])
