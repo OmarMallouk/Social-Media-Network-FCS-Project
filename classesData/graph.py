@@ -5,7 +5,7 @@ class Graph:
     def __init__(self):
         # Dictionary to store the graph data using adjacency list
         self.adjacency_list = {}  
-        self.graph = nx.Graph()
+        self.graph = nx.DiGraph()
 
     #adding user and plotting to the graph
     def add_user(self, user_id, name):
@@ -75,9 +75,11 @@ class Graph:
         
     # draws the graph with vertices 
     def draw_graph(self):
-        pos = nx.spring_layout(self.graph)
+        pos = nx.spring_layout(self.graph, seed=42)  # Use spring layout with fixed seed for consistent positioning
         labels = nx.get_node_attributes(self.graph, 'name')
         edge_labels = nx.get_edge_attributes(self.graph, 'weight')
+        
+        plt.figure(figsize=(10, 7))  # Increase figure size for better spacing
         nx.draw(self.graph, pos, with_labels=True, labels=labels, node_size=5000, node_color='lightblue', font_size=10, font_color='black', arrows=True)
         nx.draw_networkx_edge_labels(self.graph, pos, edge_labels=edge_labels)
         plt.show()
