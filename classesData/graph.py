@@ -41,6 +41,7 @@ class Graph:
         if user_id1 in self.adjacency_list and user_id2 in self.adjacency_list:
             self.adjacency_list[user_id1]["friends"].add(user_id2)
             self.adjacency_list[user_id2]["friends"].add(user_id1)
+            self.graph.add_edge(user_id1, user_id2)
         else:
             print(f"One or both users ({user_id1}, {user_id2}) do not exist in the graph.")
 
@@ -71,6 +72,13 @@ class Graph:
         else:
             print(f"User {user_id} does not exist in the graph.")
             return []
+        
+    # draws the graph with vertices 
+    def draw_graph(self):
+        pos = nx.spring_layout(self.graph)
+        labels = nx.get_node_attributes(self.graph, 'name')
+        nx.draw(self.graph, pos, with_labels=True, labels=labels, node_size=5000, node_color='lightblue', font_size=10, font_color='black')
+        plt.show()
         
     def __repr__(self):
         """Return a string representation of the graph."""
