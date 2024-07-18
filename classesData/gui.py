@@ -52,6 +52,9 @@ class SocialNetworkApp:
         self.output_text = Text(self.frame, height=10, width=40)
         self.output_text.grid(row=9, column=0, columnspan=2)
 
+         # Graph Visualization Section
+        Button(self.frame, text="Show Network Graph", command=self.show_network_graph).grid(row=10, column=0, columnspan=2)
+
     def add_user(self):
          try:
              
