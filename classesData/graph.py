@@ -36,12 +36,12 @@ class Graph:
             print(f"User {user_id} does not exist in the graph.")
 
 
-    def add_friendship(self, user_id1, user_id2):
+    def add_friendship(self, user_id1, user_id2, weight=1.0):
         """Add a friendship (edge) between two users."""
         if user_id1 in self.adjacency_list and user_id2 in self.adjacency_list:
             self.adjacency_list[user_id1]["friends"].add(user_id2)
-            self.adjacency_list[user_id2]["friends"].add(user_id1)
-            self.graph.add_edge(user_id1, user_id2)
+    
+            self.graph.add_edge(user_id1, user_id2, weight=weight)
         else:
             print(f"One or both users ({user_id1}, {user_id2}) do not exist in the graph.")
 
@@ -77,7 +77,9 @@ class Graph:
     def draw_graph(self):
         pos = nx.spring_layout(self.graph)
         labels = nx.get_node_attributes(self.graph, 'name')
-        nx.draw(self.graph, pos, with_labels=True, labels=labels, node_size=5000, node_color='lightblue', font_size=10, font_color='black')
+        edge_labels = nx.get_edge_attributes(self.graph, 'weight')
+        nx.draw(self.graph, pos, with_labels=True, labels=labels, node_size=5000, node_color='lightblue', font_size=10, font_color='black', arrows=True)
+        nx.draw_networkx_edge_labels(self.graph, pos, edge_labels=edge_labels)
         plt.show()
         
     def __repr__(self):
