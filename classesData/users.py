@@ -4,6 +4,7 @@ class Users:
         
         # Created a dictionary to store the users(the key is user_id, value is the user)
         self.users = {}
+        
 
      # method to add a user 
     def add_user(self, user_id, name, email=None, age=None):
