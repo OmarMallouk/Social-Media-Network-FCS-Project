@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import messagebox
 from .users import Users
 from .graph import Graph
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import matplotlib.pyplot as plt
 
 
 class SocialNetworkApp:
@@ -10,7 +12,7 @@ class SocialNetworkApp:
         self.social_network = Graph()
         
         self.root = root
-        self.root.title("Social Network Manager")
+        self.root.title("Social Network ")
 
         self.frame = Frame(root)
         self.frame.pack()
@@ -110,3 +112,6 @@ class SocialNetworkApp:
                 self.output_text.insert(END, "  Friends: " + ", ".join([friend[1] for friend in friends]) + "\n")
             else:
                 self.output_text.insert(END, "  No friends\n")
+    
+    def show_network_graph(self):
+        self.social_network.draw_graph()
