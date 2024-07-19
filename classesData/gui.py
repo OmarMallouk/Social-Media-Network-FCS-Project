@@ -51,6 +51,9 @@ class SocialNetworkApp:
 
         Button(self.frame, text="Add Friendship", command=self.add_friendship).grid(row=8, column=0, columnspan=2)
 
+        # Remove Friendship Button
+        Button(self.frame, text="Remove Friendship", command=self.remove_friendship).grid(row=9, column=0, columnspan=2)
+
         # Display Section
         Button(self.frame, text="Display Users", command=self.display_users).grid(row=9, column=0, columnspan=2)
         self.output_text = Text(self.frame, height=10, width=40)
