@@ -50,12 +50,10 @@ class Graph:
 
         """Remove a friendship between two users."""
 
-        if user_id1 in self.adjacency_list and user_id2 in self.adjacency_list:
-
-            self.adjacency_list[user_id1]["friends"].discard(user_id2)
-
-            self.adjacency_list[user_id2]["friends"].discard(user_id1)
-
+        if user_id1 in self.adjacency_list and user_id2 in self.adjacency_list[user_id1]['friends']:
+            self.adjacency_list[user_id1]['friends'].remove(user_id2)
+            if self.graph.has_edge(user_id1, user_id2):
+                self.graph.remove_edge(user_id1, user_id2)
         else:
 
             print(f"One or both users ({user_id1}, {user_id2}) do not exist in the graph.")
