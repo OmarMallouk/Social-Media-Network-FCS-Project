@@ -1,6 +1,6 @@
-from tkinter import *
+import tkinter as tk
 from tkinter import messagebox
-from .users import Users
+from .users import UserManager
 from .graph import Graph
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
@@ -8,83 +8,95 @@ import matplotlib.pyplot as plt
 
 class SocialNetworkApp:
     def __init__(self, root):
-        self.user_manager = Users()
+        self.user_manager = UserManager()
         self.social_network = Graph()
         
         self.root = root
         self.root.title("Social Network ")
 
-        self.frame = Frame(root)
+        self.frame = tk.Frame(root)
         self.frame.pack()
 
-       # User Section
-        Label(self.frame, text="User ID").grid(row=0, column=0)
-        self.user_id_entry = Entry(self.frame)
-        self.user_id_entry.grid(row=0, column=1)
+       
+        # User Section
+        tk.Label(self.frame, text="Name").grid(row=0, column=0)
+        self.name_entry = tk.Entry(self.frame)
+        self.name_entry.grid(row=0, column=1)
 
-        Label(self.frame, text="Name").grid(row=1, column=0)
-        self.name_entry = Entry(self.frame)
-        self.name_entry.grid(row=1, column=1)
+        tk.Label(self.frame, text="Age").grid(row=1, column=0)
+        self.age_entry = tk.Entry(self.frame)
+        self.age_entry.grid(row=1, column=1)
 
-        Label(self.frame, text="Email").grid(row=2, column=0)
-        self.email_entry = Entry(self.frame)
-        self.email_entry.grid(row=2, column=1)
 
-        Label(self.frame, text="Age").grid(row=3, column=0)
-        self.age_entry = Entry(self.frame)
-        self.age_entry.grid(row=3, column=1)
+        tk.Label(self.frame, text="email").grid(row=3, column=0)
+        self.email_entry = tk.Entry(self.frame)
+        self.email_entry.grid(row=3, column=1)
 
-        Button(self.frame, text="Add User", command=self.add_user).grid(row=4, column=0, columnspan=2)
+        tk.Button(self.frame, text="Add User", command=self.add_user).grid(row=4, column=0, columnspan=2)
+
+        # Update User Section
+        tk.Label(self.frame, text="Update User ID").grid(row=5, column=0)
+        self.update_user_id_entry = tk.Entry(self.frame)
+        self.update_user_id_entry.grid(row=5, column=1)
+
+        tk.Label(self.frame, text="New Name").grid(row=6, column=0)
+        self.new_name_entry = tk.Entry(self.frame)
+        self.new_name_entry.grid(row=6, column=1)
+
+        tk.Label(self.frame, text="New Email").grid(row=8, column=0)
+        self.new_email_entry = tk.Entry(self.frame)
+        self.new_email_entry.grid(row=8, column=1)
+
+        tk.Button(self.frame, text="Update User", command=self.update_user).grid(row=10, column=0, columnspan=2)
 
         # Friendship Section
-        Label(self.frame, text="User ID 1").grid(row=5, column=0)
-        self.user_id1_entry = Entry(self.frame)
-        self.user_id1_entry.grid(row=5, column=1)
+        tk.Label(self.frame, text="User ID 1").grid(row=11, column=0)
+        self.user_id1_entry = tk.Entry(self.frame)
+        self.user_id1_entry.grid(row=11, column=1)
 
-        Label(self.frame, text="User ID 2").grid(row=6, column=0)
-        self.user_id2_entry = Entry(self.frame)
-        self.user_id2_entry.grid(row=6, column=1)
+        tk.Label(self.frame, text="User ID 2").grid(row=12, column=0)
+        self.user_id2_entry = tk.Entry(self.frame)
+        self.user_id2_entry.grid(row=12, column=1)
 
-        Label(self.frame, text="Weight").grid(row=7, column=0)
-        self.weight_entry = Entry(self.frame)
-        self.weight_entry.grid(row=7, column=1)
+        tk.Label(self.frame, text="Weight").grid(row=13, column=0)
+        self.weight_entry = tk.Entry(self.frame)
+        self.weight_entry.grid(row=13, column=1)
 
-        Button(self.frame, text="Add Friendship", command=self.add_friendship).grid(row=8, column=0, columnspan=2)
-
-        # Remove Friendship Button
-        Button(self.frame, text="Remove Friendship", command=self.remove_friendship).grid(row=9, column=0, columnspan=2)
+        tk.Button(self.frame, text="Add Friendship", command=self.add_friendship).grid(row=14, column=0, columnspan=2)
+        tk.Button(self.frame, text="Remove Friendship", command=self.remove_friendship).grid(row=15, column=0, columnspan=2)
 
         # Display Section
-        Button(self.frame, text="Display Users", command=self.display_users).grid(row=9, column=0, columnspan=2)
-        self.output_text = Text(self.frame, height=10, width=40)
-        self.output_text.grid(row=10, column=0, columnspan=2)
+        tk.Button(self.frame, text="Display Users", command=self.display_users).grid(row=16, column=0, columnspan=2)
+        self.output_text = tk.Text(self.frame, height=10, width=40)
+        self.output_text.grid(row=17, column=0, columnspan=2)
 
         # Graph Visualization Section
-        Button(self.frame, text="Show Network Graph", command=self.show_network_graph).grid(row=11, column=0, columnspan=2)
+        tk.Button(self.frame, text="Show Network Graph", command=self.show_network_graph).grid(row=18, column=0, columnspan=2)
 
     def add_user(self):
-         try:
-             
-             user_id = int(self.user_id_entry.get())
-             name = self.name_entry.get()
-             email = self.email_entry.get()
-             age = int(self.age_entry.get())
-
-             if self.user_manager.get_user(user_id):
-                messagebox.showerror("Error", f"User ID {user_id} already exists.")
-                return
-             
-             self.user_manager.add_user(user_id, name, email, age)
-             self.social_network.add_user(user_id, name)
-            
-             messagebox.showinfo("Success", f"User {name} added successfully!")
-         except ValueError:
-             messagebox.showerror("Error", "Invalid input. Please enter valid data.")
-
+        name = self.name_entry.get()
+        age = int(self.age_entry.get())
+        email = self.email_entry.get()
+        user_id = self.user_manager.add_user(name, age, email)
+        if user_id is None:
+            messagebox.showerror("Error", f"User with email {email} already exists.")
+        else:
+            self.social_network.add_user(user_id, name)
+            messagebox.showinfo("Success", f"User {name} added successfully!")
         
        
-        
-      
+    def update_user(self):
+        user_id = int(self.update_user_id_entry.get())
+        new_name = self.new_name_entry.get()
+        new_email = self.new_email_entry.get()
+        success =  self.user_manager.update_user(user_id, name=new_name, email=new_email)
+        if success:
+            if new_name:
+                self.social_network.update_user_name(user_id, new_name)
+            messagebox.showinfo("Success", f"User {user_id} updated successfully!")
+        else:
+            messagebox.showerror("Error", f"Failed to update user {user_id}. Email may already exist.")
+
 
     def add_friendship(self):
         try:
@@ -110,19 +122,31 @@ class SocialNetworkApp:
             messagebox.showinfo("Success", f"Friendship added between User {user_id1} and User {user_id2} with weight {weight}")
         except ValueError:
             messagebox.showerror("Error", "Invalid input. Please enter valid user IDs.")
+    
+
+
+
+    def remove_friendship(self):
+        user_id1 = int(self.user_id1_entry.get())
+        user_id2 = int(self.user_id2_entry.get())
+        self.social_network.remove_friendship(user_id1, user_id2)
+        messagebox.showinfo("Success", f"Friendship between {user_id1} and {user_id2} removed successfully!")
+
 
     def display_users(self):
-        self.output_text.delete(1.0, END)
-        users = self.social_network.get_users()
+        self.output_text.delete(1.0, tk.END)
+        users = self.user_manager.get_all_users()
         if not users:
-            self.output_text.insert(END, "No users in the network.\n")
+            self.output_text.insert(tk.END, "No users in the network.\n")
         for user in users:
-            self.output_text.insert(END, f"User: {user[1]} (ID: {user[0]})\n")
-            friends = self.social_network.get_friends(user[0])
+            self.output_text.insert(tk.END, f"User: {user.name} (ID: {user.id})\n")
+            friends = self.social_network.get_friends(user.id)
             if friends:
-                self.output_text.insert(END, "  Friends: " + ", ".join([friend[1] for friend in friends]) + "\n")
+                friend_names = [self.user_manager.get_user(friend_id).name for friend_id in friends]
+                self.output_text.insert(tk.END, "  Friends: " + ", ".join(friend_names) + "\n")
             else:
-                self.output_text.insert(END, "  No friends\n")
+                self.output_text.insert(tk.END, "  No friends\n")
+
     
     def show_network_graph(self):
         self.social_network.draw_graph()

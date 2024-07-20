@@ -6,6 +6,7 @@ class Graph:
         # Dictionary to store the graph data using adjacency list
         self.adjacency_list = {}  
         self.graph = nx.DiGraph()
+        
 
     #adding user and plotting to the graph
     def add_user(self, user_id, name):
@@ -19,69 +20,32 @@ class Graph:
         else:
             print(f"User {user_id} already exists in the graph.")
 
-    def remove_user(self, user_id):
-
-        """Remove a user from the graph."""
-
-        if user_id in self.users:
-
-            del self.users[user_id]
-
-            for user in self.users.values():
-
-                user["friends"].discard(user_id)
-
-        else:
-
-            print(f"User {user_id} does not exist in the graph.")
-
-
-    def add_friendship(self, user_id1, user_id2, weight=1.0):
-        """Add a friendship (edge) between two users."""
-        if user_id1 in self.adjacency_list and user_id2 in self.adjacency_list:
-            self.adjacency_list[user_id1]["friends"].add(user_id2)
+     
     
-            self.graph.add_edge(user_id1, user_id2, weight=weight)
-        else:
-            print(f"One or both users ({user_id1}, {user_id2}) do not exist in the graph.")
+    def add_friendship(self, user_id1, user_id2, weight=1):
+        self.graph.add_edge(user_id1, user_id2, weight=weight)
 
     
     def remove_friendship(self, user_id1, user_id2):
-
-        """Remove a friendship between two users."""
-
-        if user_id1 in self.adjacency_list and user_id2 in self.adjacency_list[user_id1]['friends']:
-            self.adjacency_list[user_id1]['friends'].remove(user_id2)
-            if self.graph.has_edge(user_id1, user_id2):
-                self.graph.remove_edge(user_id1, user_id2)
-        else:
-
-            print(f"One or both users ({user_id1}, {user_id2}) do not exist in the graph.")
+        if self.graph.has_edge(user_id1, user_id2):
+            self.graph.remove_edge(user_id1, user_id2)
 
 
-    def get_users(self):
-        """Return a list of all users in the graph."""
-        return [(user_id, self.adjacency_list[user_id]["name"]) for user_id in self.adjacency_list]
-
+   
     def get_friends(self, user_id):
-        """Return a list of friends for a given user."""
-        if user_id in self.adjacency_list:
-            return [(friend_id, self.adjacency_list[friend_id]["name"]) for friend_id in self.adjacency_list[user_id]["friends"]]
-        else:
-            print(f"User {user_id} does not exist in the graph.")
-            return []
+        return list(self.graph.successors(user_id))
+        
+    def update_user_name(self, user_id, new_name):
+        if user_id in self.graph:
+            self.graph.nodes[user_id]['name'] = new_name
         
     # draws the graph with vertices 
     def draw_graph(self):
-        pos = nx.spring_layout(self.graph, seed=42)  # Use spring layout with fixed seed for consistent positioning
+        pos = nx.spring_layout(self.graph)
         labels = nx.get_node_attributes(self.graph, 'name')
         edge_labels = nx.get_edge_attributes(self.graph, 'weight')
-        
-        plt.figure(figsize=(10, 7))  # Increase figure size for better spacing
-        nx.draw(self.graph, pos, with_labels=True, labels=labels, node_size=5000, node_color='lightblue', font_size=10, font_color='black', arrows=True)
+        plt.figure(figsize=(8, 6))
+        nx.draw(self.graph, pos, with_labels=True, labels=labels, node_size=3000, node_color='skyblue', font_size=10, font_weight='bold', arrows=True)
+       
         nx.draw_networkx_edge_labels(self.graph, pos, edge_labels=edge_labels)
         plt.show()
-        
-    def __repr__(self):
-        """Return a string representation of the graph."""
-        return f"Graph({self.graph})"
