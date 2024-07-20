@@ -51,3 +51,26 @@ class UserManager:
 
     def get_all_users(self):
         return list(self.users.values())
+    
+
+    
+    def quick_sort(self):
+        users_list = list(self.users.values())
+        self._quick_sort_recursive(users_list, 0, len(users_list) - 1)
+        self.users = {user.id: user for user in users_list}
+
+    def _quick_sort_recursive(self, arr, low, high):
+        if low < high:
+            pi = self._partition(arr, low, high)
+            self._quick_sort_recursive(arr, low, pi - 1)
+            self._quick_sort_recursive(arr, pi + 1, high)
+
+    def _partition(self, arr, low, high):
+        pivot = arr[high].name
+        i = low - 1
+        for j in range(low, high):
+            if arr[j].name <= pivot:
+                i += 1
+                arr[i], arr[j] = arr[j], arr[i]
+        arr[i + 1], arr[high] = arr[high], arr[i + 1]
+        return i + 1

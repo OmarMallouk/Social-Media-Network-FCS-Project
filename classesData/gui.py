@@ -18,7 +18,7 @@ class SocialNetworkApp:
         self.frame.pack()
 
        
-         # User Section
+        # User Section
         tk.Label(self.frame, text="Name").grid(row=0, column=0)
         self.name_entry = tk.Entry(self.frame)
         self.name_entry.grid(row=0, column=1)
@@ -52,42 +52,62 @@ class SocialNetworkApp:
 
         tk.Button(self.frame, text="Update User", command=self.update_user).grid(row=8, column=0, columnspan=2)
 
+        # Delete User Section
+        tk.Label(self.frame, text="Delete User ID").grid(row=9, column=0)
+        self.delete_user_id_entry = tk.Entry(self.frame)
+        self.delete_user_id_entry.grid(row=9, column=1)
+
+        tk.Button(self.frame, text="Delete User", command=self.delete_user).grid(row=10, column=0, columnspan=2)
+
         # Friendship Section
-        tk.Label(self.frame, text="User ID 1").grid(row=9, column=0)
+        tk.Label(self.frame, text="User ID 1").grid(row=11, column=0)
         self.user_id1_entry = tk.Entry(self.frame)
-        self.user_id1_entry.grid(row=9, column=1)
+        self.user_id1_entry.grid(row=11, column=1)
 
-        tk.Label(self.frame, text="User ID 2").grid(row=10, column=0)
+        tk.Label(self.frame, text="User ID 2").grid(row=12, column=0)
         self.user_id2_entry = tk.Entry(self.frame)
-        self.user_id2_entry.grid(row=10, column=1)
+        self.user_id2_entry.grid(row=12, column=1)
 
-        tk.Label(self.frame, text="Weight").grid(row=11, column=0)
+        tk.Label(self.frame, text="Weight").grid(row=13, column=0)
         self.weight_entry = tk.Entry(self.frame)
-        self.weight_entry.grid(row=11, column=1)
+        self.weight_entry.grid(row=13, column=1)
 
-        tk.Button(self.frame, text="Add Friendship", command=self.add_friendship).grid(row=12, column=0, columnspan=2)
+        tk.Button(self.frame, text="Add Friendship", command=self.add_friendship).grid(row=14, column=0, columnspan=2)
         
-        tk.Button(self.frame, text="Remove Friendship", command=self.remove_friendship).grid(row=13, column=0, columnspan=2)
+        tk.Button(self.frame, text="Remove Friendship", command=self.remove_friendship).grid(row=15, column=0, columnspan=2)
 
         # Display Section
-        tk.Button(self.frame, text="Display Users", command=self.display_users).grid(row=14, column=0, columnspan=2)
+        tk.Button(self.frame, text="Display Users", command=self.display_users).grid(row=16, column=0, columnspan=2)
+        tk.Button(self.frame, text="Sort Users by Name", command=self.sort_users_by_name).grid(row=17, column=0, columnspan=2)
         self.output_text = tk.Text(self.frame, height=10, width=40)
-        self.output_text.grid(row=15, column=0, columnspan=2)
+        self.output_text.grid(row=18, column=0, columnspan=2)
 
         # Graph Visualization Section
-        tk.Button(self.frame, text="Show Network Graph", command=self.show_network_graph).grid(row=16, column=0, columnspan=2)
+        tk.Button(self.frame, text="Show Network Graph", command=self.show_network_graph).grid(row=19, column=0, columnspan=2)
 
         # BFS and DFS Section
-        tk.Label(self.frame, text="Start User ID").grid(row=17, column=0)
+        tk.Label(self.frame, text="Start User ID").grid(row=20, column=0)
         self.start_user_id_entry = tk.Entry(self.frame)
-        self.start_user_id_entry.grid(row=17, column=1)
+        self.start_user_id_entry.grid(row=20, column=1)
 
-        tk.Button(self.frame, text="BFS", command=self.bfs).grid(row=18, column=0)
-        tk.Button(self.frame, text="DFS", command=self.dfs).grid(row=18, column=1)
+        tk.Button(self.frame, text="BFS", command=self.bfs).grid(row=21, column=0)
+        tk.Button(self.frame, text="DFS", command=self.dfs).grid(row=21, column=1)
 
         self.output_text_2 = tk.Text(self.frame, height=10, width=40)
-        self.output_text_2.grid(row=19, column=0, columnspan=2)
+        self.output_text_2.grid(row=22, column=0, columnspan=2)
 
+        # Shortest Path Section
+        tk.Label(self.frame, text="Start User ID").grid(row=23, column=0)
+        self.start_user_id_path_entry = tk.Entry(self.frame)
+        self.start_user_id_path_entry.grid(row=23, column=1)
+
+        tk.Label(self.frame, text="End User ID").grid(row=24, column=0)
+        self.end_user_id_path_entry = tk.Entry(self.frame)
+        self.end_user_id_path_entry.grid(row=24, column=1)
+
+        tk.Button(self.frame, text="Find Shortest Path", command=self.find_shortest_path).grid(row=25, column=0, columnspan=2)
+        self.output_text_3 = tk.Text(self.frame, height=10, width=40)
+        self.output_text_3.grid(row=26, column=0, columnspan=2)
 
     #
     def add_user(self):
@@ -172,6 +192,10 @@ class SocialNetworkApp:
                 self.output_text.insert(tk.END, "  Friends: " + ", ".join(friend_names) + "\n")
             else:
                 self.output_text.insert(tk.END, "  No friends\n")
+    
+    def sort_users_by_name(self):
+        self.user_manager.quick_sort()
+        self.display_users()
 
     
     def show_network_graph(self):
@@ -210,3 +234,24 @@ class SocialNetworkApp:
                         self.output_text_2.insert(tk.END, f"{user.name} (ID: {user.id})\n")
         except ValueError:
             messagebox.showerror("Error", "Invalid input. Please enter a valid start user ID.")
+
+    
+    def find_shortest_path(self):
+        try:
+            start_user_id = int(self.start_user_id_path_entry.get())
+            end_user_id = int(self.end_user_id_path_entry.get())
+            path, distance = self.social_network.dijkstra(start_user_id, end_user_id)
+            self.output_text_3.delete(1.0, tk.END)
+            if path is None:
+                self.output_text_3.insert(tk.END, "No path found.\n")
+            else:
+                self.output_text_3.insert(tk.END, f"Shortest Path (distance: {distance}):\n")
+                for user_id in path:
+                    user = self.user_manager.get_user(user_id)
+                    if user:
+                        self.output_text_3.insert(tk.END, f"{user.name} (ID: {user.id})\n")
+        except ValueError:
+            messagebox.showerror("Error", "Invalid input. Please enter valid user IDs.")
+
+    
+   

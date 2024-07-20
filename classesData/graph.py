@@ -1,6 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 from collections import deque
+import heapq
 
 class Graph:
     def __init__(self):
@@ -81,3 +82,37 @@ class Graph:
                 stack.extend(reversed(list(self.graph.successors(user_id))))
         
         return order
+    
+
+    def dijkstra(self, start_user_id, end_user_id):
+        distances = {node: float('inf') for node in self.graph.nodes}
+        distances[start_user_id] = 0
+        priority_queue = [(0, start_user_id)]
+        previous_nodes = {node: None for node in self.graph.nodes}
+
+        while priority_queue:
+            current_distance, current_node = heapq.heappop(priority_queue)
+
+            if current_distance > distances[current_node]:
+                continue
+
+            for neighbor in self.graph.successors(current_node):
+                weight = self.graph.edges[current_node, neighbor]['weight']
+                distance = current_distance + weight
+
+                if distance < distances[neighbor]:
+                    distances[neighbor] = distance
+                    previous_nodes[neighbor] = current_node
+                    heapq.heappush(priority_queue, (distance, neighbor))
+
+        path = []
+        current_node = end_user_id
+        while current_node is not None:
+            path.append(current_node)
+            current_node = previous_nodes[current_node]
+        path = path[::-1]
+
+        if distances[end_user_id] == float('inf'):
+            return None, float('inf')
+
+        return path, distances[end_user_id]
