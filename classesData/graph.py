@@ -1,5 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
+from collections import deque
 
 class Graph:
     def __init__(self):
@@ -20,7 +21,9 @@ class Graph:
         else:
             print(f"User {user_id} already exists in the graph.")
 
-     
+    def remove_user(self, user_id):
+        self.graph.remove_node(user_id)
+
     
     def add_friendship(self, user_id1, user_id2, weight=1):
         self.graph.add_edge(user_id1, user_id2, weight=weight)
@@ -49,3 +52,18 @@ class Graph:
        
         nx.draw_networkx_edge_labels(self.graph, pos, edge_labels=edge_labels)
         plt.show()
+
+    
+    def bfs(self, start_user_id):
+        visited = set()
+        queue = deque([start_user_id])
+        order = []
+
+        while queue:
+            user_id = queue.popleft()
+            if user_id not in visited:
+                visited.add(user_id)
+                order.append(user_id)
+                queue.extend(self.graph.successors(user_id))
+        
+        return order
