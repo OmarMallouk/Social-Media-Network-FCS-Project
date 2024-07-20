@@ -67,3 +67,17 @@ class Graph:
                 queue.extend(self.graph.successors(user_id))
         
         return order
+    
+    def dfs(self, start_user_id):
+        visited = set()
+        stack = [start_user_id]
+        order = []
+
+        while stack:
+            user_id = stack.pop()
+            if user_id not in visited:
+                visited.add(user_id)
+                order.append(user_id)
+                stack.extend(reversed(list(self.graph.successors(user_id))))
+        
+        return order
