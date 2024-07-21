@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "jsnetworkx": "^0.3.4",
+    "matplotlib": "^1.0.0"
+  }
+}
