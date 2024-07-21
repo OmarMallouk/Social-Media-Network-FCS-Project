@@ -74,3 +74,24 @@ class UserManager:
                 arr[i], arr[j] = arr[j], arr[i]
         arr[i + 1], arr[high] = arr[high], arr[i + 1]
         return i + 1
+    
+
+    def binary_search(self, name: str):
+        sorted_users = sorted(self.users.values(), key=lambda user: user.name)
+        low, high = 0, len(sorted_users) - 1
+        while low <= high:
+            mid = (low + high) // 2
+            if sorted_users[mid].name == name:
+                return sorted_users[mid]
+            elif sorted_users[mid].name < name:
+                low = mid + 1
+            else:
+                high = mid - 1
+        return None
+    
+    def calculate_average_age(self):
+        if not self.users:
+            return 0
+        total_age = sum(user.age for user in self.users.values())
+        average_age = total_age / len(self.users)
+        return average_age

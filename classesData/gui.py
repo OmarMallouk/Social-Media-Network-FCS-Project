@@ -18,7 +18,7 @@ class SocialNetworkApp:
         self.frame.pack()
 
        
-        # User Section
+         # User Section
         tk.Label(self.frame, text="Name").grid(row=0, column=0)
         self.name_entry = tk.Entry(self.frame)
         self.name_entry.grid(row=0, column=1)
@@ -42,72 +42,72 @@ class SocialNetworkApp:
         self.new_name_entry = tk.Entry(self.frame)
         self.new_name_entry.grid(row=5, column=1)
 
-        tk.Label(self.frame, text="New Age").grid(row=6, column=0)
-        self.new_age_entry = tk.Entry(self.frame)
-        self.new_age_entry.grid(row=6, column=1)
-
-        tk.Label(self.frame, text="New Email").grid(row=7, column=0)
+        tk.Label(self.frame, text="New Email").grid(row=6, column=0)
         self.new_email_entry = tk.Entry(self.frame)
-        self.new_email_entry.grid(row=7, column=1)
+        self.new_email_entry.grid(row=6, column=1)
 
-        tk.Button(self.frame, text="Update User", command=self.update_user).grid(row=8, column=0, columnspan=2)
-
-        # Delete User Section
-        tk.Label(self.frame, text="Delete User ID").grid(row=9, column=0)
-        self.delete_user_id_entry = tk.Entry(self.frame)
-        self.delete_user_id_entry.grid(row=9, column=1)
-
-        tk.Button(self.frame, text="Delete User", command=self.delete_user).grid(row=10, column=0, columnspan=2)
+        tk.Button(self.frame, text="Update User", command=self.update_user).grid(row=7, column=0, columnspan=2)
 
         # Friendship Section
-        tk.Label(self.frame, text="User ID 1").grid(row=11, column=0)
+        tk.Label(self.frame, text="User ID 1").grid(row=8, column=0)
         self.user_id1_entry = tk.Entry(self.frame)
-        self.user_id1_entry.grid(row=11, column=1)
+        self.user_id1_entry.grid(row=8, column=1)
 
-        tk.Label(self.frame, text="User ID 2").grid(row=12, column=0)
+        tk.Label(self.frame, text="User ID 2").grid(row=9, column=0)
         self.user_id2_entry = tk.Entry(self.frame)
-        self.user_id2_entry.grid(row=12, column=1)
+        self.user_id2_entry.grid(row=9, column=1)
 
-        tk.Label(self.frame, text="Weight").grid(row=13, column=0)
+        tk.Label(self.frame, text="Weight").grid(row=10, column=0)
         self.weight_entry = tk.Entry(self.frame)
-        self.weight_entry.grid(row=13, column=1)
+        self.weight_entry.grid(row=10, column=1)
 
-        tk.Button(self.frame, text="Add Friendship", command=self.add_friendship).grid(row=14, column=0, columnspan=2)
+        tk.Button(self.frame, text="Add Friendship", command=self.add_friendship).grid(row=11, column=0, columnspan=2)
         
-        tk.Button(self.frame, text="Remove Friendship", command=self.remove_friendship).grid(row=15, column=0, columnspan=2)
+        tk.Button(self.frame, text="Remove Friendship", command=self.remove_friendship).grid(row=12, column=0, columnspan=2)
 
         # Display Section
-        tk.Button(self.frame, text="Display Users", command=self.display_users).grid(row=16, column=0, columnspan=2)
-        tk.Button(self.frame, text="Sort Users by Name", command=self.sort_users_by_name).grid(row=17, column=0, columnspan=2)
+        tk.Button(self.frame, text="Display Users", command=self.display_users).grid(row=13, column=0, columnspan=2)
         self.output_text = tk.Text(self.frame, height=10, width=40)
-        self.output_text.grid(row=18, column=0, columnspan=2)
+        self.output_text.grid(row=14, column=0, columnspan=2)
+
+        # Sorting Section
+        tk.Button(self.frame, text="Sort Users by Name", command=self.sort_users_by_name).grid(row=16, column=0, columnspan=2)
 
         # Graph Visualization Section
-        tk.Button(self.frame, text="Show Network Graph", command=self.show_network_graph).grid(row=19, column=0, columnspan=2)
+        tk.Button(self.frame, text="Show Network Graph", command=self.show_network_graph).grid(row=17, column=0, columnspan=2)
 
-        # BFS and DFS Section
-        tk.Label(self.frame, text="Start User ID").grid(row=20, column=0)
-        self.start_user_id_entry = tk.Entry(self.frame)
-        self.start_user_id_entry.grid(row=20, column=1)
+        # Open Additional Functions Window
+        tk.Button(self.frame, text="Advanced Functions", command=self.open_advanced_window).grid(row=19, column=0, columnspan=2)
 
-        tk.Button(self.frame, text="BFS", command=self.bfs).grid(row=21, column=0)
-        tk.Button(self.frame, text="DFS", command=self.dfs).grid(row=21, column=1)
+    def open_advanced_window(self):
+        self.advanced_window = tk.Toplevel(self.root)
+        self.advanced_window.title("Advanced Functions")
 
-        self.output_text_2 = tk.Text(self.frame, height=10, width=40)
-        self.output_text_2.grid(row=22, column=0, columnspan=2)
+        tk.Label(self.advanced_window, text="Start User ID").grid(row=0, column=0)
+        self.start_user_id_entry = tk.Entry(self.advanced_window)
+        self.start_user_id_entry.grid(row=0, column=1)
 
-        # Shortest Path Section
-        tk.Label(self.frame, text="Start User ID").grid(row=23, column=0)
-        self.start_user_id_path_entry = tk.Entry(self.frame)
-        self.start_user_id_path_entry.grid(row=23, column=1)
+        tk.Button(self.advanced_window, text="BFS", command=self.bfs).grid(row=1, column=0)
+        tk.Button(self.advanced_window, text="DFS", command=self.dfs).grid(row=1, column=1)
 
-        tk.Label(self.frame, text="End User ID").grid(row=24, column=0)
-        self.end_user_id_path_entry = tk.Entry(self.frame)
-        self.end_user_id_path_entry.grid(row=24, column=1)
+        self.output_text_2 = tk.Text(self.advanced_window, height=10, width=40)
+        self.output_text_2.grid(row=2, column=0, columnspan=2)
 
-        tk.Button(self.frame, text="Find Shortest Path", command=self.find_shortest_path).grid(row=25, column=0, columnspan=2)
-        self.output_text_3 = tk.Text(self.frame, height=10, width=40)
-        self.output_text_3.grid(row=26, column=0, columnspan=2)
+        tk.Label(self.advanced_window, text="Start User ID").grid(row=3, column=0)
+        self.start_user_id_path_entry = tk.Entry(self.advanced_window)
+        self.start_user_id_path_entry.grid(row=3, column=1)
+
+        tk.Label(self.advanced_window, text="End User ID").grid(row=4, column=0)
+        self.end_user_id_path_entry = tk.Entry(self.advanced_window)
+        self.end_user_id_path_entry.grid(row=4, column=1)
+
+        tk.Button(self.advanced_window, text="Find Shortest Path", command=self.find_shortest_path).grid(row=5, column=0, columnspan=2)
+        self.output_text_3 = tk.Text(self.advanced_window, height=10, width=40)
+        self.output_text_3.grid(row=6, column=0, columnspan=2)
+
+        tk.Button(self.advanced_window, text="Calculate Average Age", command=self.calculate_average_age).grid(row=7, column=0, columnspan=2)
+        self.output_text_4 = tk.Text(self.advanced_window, height=10, width=40)
+        self.output_text_4.grid(row=8, column=0, columnspan=2)
 
     #
     def add_user(self):
@@ -254,4 +254,17 @@ class SocialNetworkApp:
             messagebox.showerror("Error", "Invalid input. Please enter valid user IDs.")
 
     
-   
+    def search_user(self):
+        name = self.search_name_entry.get()
+        user = self.user_manager.binary_search(name)
+        self.search_output_text.delete('1.0', tk.END)
+        if user:
+            self.search_output_text.insert(tk.END, f"ID: {user.id}, Name: {user.name}, Age: {user.age}, Email: {user.email}\n")
+        else:
+            self.search_output_text.insert(tk.END, "User not found.")
+
+    
+    def calculate_average_age(self):
+        average_age = self.user_manager.calculate_average_age()
+        self.output_text_4.delete(1.0, tk.END)
+        self.output_text_4.insert(tk.END, f"Average Age: {average_age:.2f}")
