@@ -1,8 +1,10 @@
 from tkinter import Tk
+import customtkinter as ctk
 from classesData.gui import SocialNetworkApp
 
 def main():
-    root = Tk()
+    root = ctk.CTk()
+    root.geometry("900x900")
     app = SocialNetworkApp(root)
     root.mainloop()
 

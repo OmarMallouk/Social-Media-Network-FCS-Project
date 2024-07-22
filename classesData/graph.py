@@ -46,7 +46,7 @@ class Graph:
     # draws the graph with vertices 
     def draw_graph(self):
         pos = nx.spring_layout(self.graph)
-        labels = nx.get_node_attributes(self.graph, 'name')
+        labels = nx.get_node_attributes(self.graph, 'name', 'user_id')
         edge_labels = nx.get_edge_attributes(self.graph, 'weight')
         plt.figure(figsize=(8, 6))
         nx.draw(self.graph, pos, with_labels=True, labels=labels, node_size=3000, node_color='skyblue', font_size=10, font_weight='bold', arrows=True)

@@ -1,5 +1,6 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, Toplevel
+import customtkinter as ctk
 from .users import UserManager
 from .graph import Graph
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -14,101 +15,118 @@ class SocialNetworkApp:
         self.root = root
         self.root.title("Social Network ")
 
-        self.frame = tk.Frame(root)
-        self.frame.pack()
+        ctk.set_appearance_mode("dark")
+        ctk.set_default_color_theme("dark-blue")
+
+        self.frame = ctk.CTkFrame(root)
+        self.frame.pack(pady=20, padx=20)
 
        
          # User Section
-        tk.Label(self.frame, text="Name").grid(row=0, column=0)
-        self.name_entry = tk.Entry(self.frame)
-        self.name_entry.grid(row=0, column=1)
+        ctk.CTkLabel(self.frame, text="Name").grid(row=0, column=0, padx=5, pady=5)
+        self.name_entry = ctk.CTkEntry(self.frame)
+        self.name_entry.grid(row=0, column=1, padx=5, pady=5)
 
-        tk.Label(self.frame, text="Age").grid(row=1, column=0)
-        self.age_entry = tk.Entry(self.frame)
-        self.age_entry.grid(row=1, column=1)
+        ctk.CTkLabel(self.frame, text="Age").grid(row=1, column=0, padx=5, pady=5)
+        self.age_entry = ctk.CTkEntry(self.frame)
+        self.age_entry.grid(row=1, column=1, padx=5, pady=5)
 
-        tk.Label(self.frame, text="Email").grid(row=2, column=0)
-        self.email_entry = tk.Entry(self.frame)
-        self.email_entry.grid(row=2, column=1)
+        ctk.CTkLabel(self.frame, text="Email").grid(row=2, column=0, padx=5, pady=5)
+        self.email_entry = ctk.CTkEntry(self.frame)
+        self.email_entry.grid(row=2, column=1, padx=5, pady=5)
 
-        tk.Button(self.frame, text="Add User", command=self.add_user).grid(row=3, column=0, columnspan=2)
+        ctk.CTkButton(self.frame, text="Add User", command=self.add_user).grid(row=3, column=0, columnspan=2, pady=5)
 
-        # Update User Section
-        tk.Label(self.frame, text="Update User ID").grid(row=4, column=0)
-        self.update_user_id_entry = tk.Entry(self.frame)
-        self.update_user_id_entry.grid(row=4, column=1)
+        ctk.CTkLabel(self.frame, text="Update User ID").grid(row=4, column=0, padx=5, pady=5)
+        self.update_user_id_entry = ctk.CTkEntry(self.frame)
+        self.update_user_id_entry.grid(row=4, column=1, padx=5, pady=5)
 
-        tk.Label(self.frame, text="New Name").grid(row=5, column=0)
-        self.new_name_entry = tk.Entry(self.frame)
-        self.new_name_entry.grid(row=5, column=1)
+        ctk.CTkLabel(self.frame, text="New Name").grid(row=5, column=0, padx=5, pady=5)
+        self.new_name_entry = ctk.CTkEntry(self.frame)
+        self.new_name_entry.grid(row=5, column=1, padx=5, pady=5)
 
-        tk.Label(self.frame, text="New Email").grid(row=6, column=0)
-        self.new_email_entry = tk.Entry(self.frame)
-        self.new_email_entry.grid(row=6, column=1)
+        ctk.CTkLabel(self.frame, text="New Email").grid(row=6, column=0, padx=5, pady=5)
+        self.new_email_entry = ctk.CTkEntry(self.frame)
+        self.new_email_entry.grid(row=6, column=1, padx=5, pady=5)
 
-        tk.Button(self.frame, text="Update User", command=self.update_user).grid(row=7, column=0, columnspan=2)
+        ctk.CTkButton(self.frame, text="Update User", command=self.update_user).grid(row=7, column=0, columnspan=2, pady=5)
+
+        ctk.CTkLabel(self.frame, text="Delete User ID").grid(row=8, column=0, padx=5, pady=5)
+        self.delete_user_id_entry = ctk.CTkEntry(self.frame)
+        self.delete_user_id_entry.grid(row=8, column=1, padx=5, pady=5)
+
+        ctk.CTkButton(self.frame, text="Delete User", command=self.delete_user).grid(row=9, column=0, columnspan=2, pady=5)
 
         # Friendship Section
-        tk.Label(self.frame, text="User ID 1").grid(row=8, column=0)
-        self.user_id1_entry = tk.Entry(self.frame)
-        self.user_id1_entry.grid(row=8, column=1)
+        ctk.CTkLabel(self.frame, text="User ID 1").grid(row=10, column=0)
+        self.user_id1_entry = ctk.CTkEntry(self.frame)
+        self.user_id1_entry.grid(row=10, column=1)
 
-        tk.Label(self.frame, text="User ID 2").grid(row=9, column=0)
-        self.user_id2_entry = tk.Entry(self.frame)
-        self.user_id2_entry.grid(row=9, column=1)
+        ctk.CTkLabel(self.frame, text="User ID 2").grid(row=11, column=0)
+        self.user_id2_entry = ctk.CTkEntry(self.frame)
+        self.user_id2_entry.grid(row=11, column=1)
 
-        tk.Label(self.frame, text="Weight").grid(row=10, column=0)
-        self.weight_entry = tk.Entry(self.frame)
-        self.weight_entry.grid(row=10, column=1)
+        ctk.CTkLabel(self.frame, text="Weight").grid(row=12, column=0)
+        self.weight_entry = ctk.CTkEntry(self.frame)
+        self.weight_entry.grid(row=12, column=1)
 
-        tk.Button(self.frame, text="Add Friendship", command=self.add_friendship).grid(row=11, column=0, columnspan=2)
-        
-        tk.Button(self.frame, text="Remove Friendship", command=self.remove_friendship).grid(row=12, column=0, columnspan=2)
+        ctk.CTkButton(self.frame, text="Add Friendship", command=self.add_friendship).grid(row=13, column=0, columnspan=2)
+
+        ctk.CTkButton(self.frame, text="Remove Friendship", command=self.remove_friendship).grid(row=14, column=0, columnspan=2)
 
         # Display Section
-        tk.Button(self.frame, text="Display Users", command=self.display_users).grid(row=13, column=0, columnspan=2)
-        self.output_text = tk.Text(self.frame, height=10, width=40)
-        self.output_text.grid(row=14, column=0, columnspan=2)
+        ctk.CTkButton(self.frame, text="Display Users", command=self.display_users).grid(row=15, column=0, columnspan=2)
+        self.output_text = tk.Text(self.frame, height=10, width=50)
+        self.output_text.grid(row=16, column=0, columnspan=2, pady=5)
 
         # Sorting Section
-        tk.Button(self.frame, text="Sort Users by Name", command=self.sort_users_by_name).grid(row=16, column=0, columnspan=2)
+        ctk.CTkButton(self.frame, text="Sort Users by Name", command=self.sort_users_by_name).grid(row=17, column=0, columnspan=2, pady=5)
 
         # Graph Visualization Section
-        tk.Button(self.frame, text="Show Network Graph", command=self.show_network_graph).grid(row=17, column=0, columnspan=2)
+        ctk.CTkButton(self.frame, text="Show Network Graph", command=self.show_network_graph).grid(row=18, column=0, columnspan=2, pady=5)
 
-        # Open Additional Functions Window
-        tk.Button(self.frame, text="Advanced Functions", command=self.open_advanced_window).grid(row=19, column=0, columnspan=2)
+        ctk.CTkButton(self.frame, text="Open Advanced Functions", command=self.open_advanced_window).grid(row=19, column=0, columnspan=2, pady=10)
 
     def open_advanced_window(self):
-        self.advanced_window = tk.Toplevel(self.root)
+        self.advanced_window = ctk.CTkToplevel(self.root)
         self.advanced_window.title("Advanced Functions")
 
-        tk.Label(self.advanced_window, text="Start User ID").grid(row=0, column=0)
-        self.start_user_id_entry = tk.Entry(self.advanced_window)
-        self.start_user_id_entry.grid(row=0, column=1)
+        advanced_frame = ctk.CTkFrame(self.advanced_window)
+        advanced_frame.pack(pady=20, padx=20)
 
-        tk.Button(self.advanced_window, text="BFS", command=self.bfs).grid(row=1, column=0)
-        tk.Button(self.advanced_window, text="DFS", command=self.dfs).grid(row=1, column=1)
+        ctk.CTkLabel(advanced_frame, text="Start User ID").grid(row=0, column=0, padx=5, pady=5)
+        self.start_user_id_entry = ctk.CTkEntry(advanced_frame)
+        self.start_user_id_entry.grid(row=0, column=1, padx=5, pady=5)
 
-        self.output_text_2 = tk.Text(self.advanced_window, height=10, width=40)
-        self.output_text_2.grid(row=2, column=0, columnspan=2)
+        ctk.CTkButton(advanced_frame, text="BFS", command=self.bfs).grid(row=1, column=0, pady=5)
+        ctk.CTkButton(advanced_frame, text="DFS", command=self.dfs).grid(row=1, column=1, pady=5)
 
-        tk.Label(self.advanced_window, text="Start User ID").grid(row=3, column=0)
-        self.start_user_id_path_entry = tk.Entry(self.advanced_window)
-        self.start_user_id_path_entry.grid(row=3, column=1)
+        self.output_text_2 = tk.Text(advanced_frame, height=10, width=50)
+        self.output_text_2.grid(row=2, column=0, columnspan=2, pady=5)
 
-        tk.Label(self.advanced_window, text="End User ID").grid(row=4, column=0)
-        self.end_user_id_path_entry = tk.Entry(self.advanced_window)
-        self.end_user_id_path_entry.grid(row=4, column=1)
+        ctk.CTkLabel(advanced_frame, text="Start User ID").grid(row=3, column=0, padx=5, pady=5)
+        self.start_user_id_path_entry = ctk.CTkEntry(advanced_frame)
+        self.start_user_id_path_entry.grid(row=3, column=1, padx=5, pady=5)
 
-        tk.Button(self.advanced_window, text="Find Shortest Path", command=self.find_shortest_path).grid(row=5, column=0, columnspan=2)
-        self.output_text_3 = tk.Text(self.advanced_window, height=10, width=40)
-        self.output_text_3.grid(row=6, column=0, columnspan=2)
+        ctk.CTkLabel(advanced_frame, text="End User ID").grid(row=4, column=0, padx=5, pady=5)
+        self.end_user_id_path_entry = ctk.CTkEntry(advanced_frame)
+        self.end_user_id_path_entry.grid(row=4, column=1, padx=5, pady=5)
 
-        tk.Button(self.advanced_window, text="Calculate Average Age", command=self.calculate_average_age).grid(row=7, column=0, columnspan=2)
-        self.output_text_4 = tk.Text(self.advanced_window, height=10, width=40)
-        self.output_text_4.grid(row=8, column=0, columnspan=2)
+        ctk.CTkButton(advanced_frame, text="Find Shortest Path", command=self.find_shortest_path).grid(row=5, column=0, columnspan=2, pady=5)
+        self.output_text_3 = tk.Text(advanced_frame, height=10, width=50)
+        self.output_text_3.grid(row=6, column=0, columnspan=2, pady=5)
 
+        ctk.CTkButton(advanced_frame, text="Calculate Average Age", command=self.calculate_average_age).grid(row=7, column=0, columnspan=2, pady=5)
+        self.output_text_4 = tk.Text(advanced_frame, height=10, width=50)
+        self.output_text_4.grid(row=8, column=0, columnspan=2, pady=5)
+
+        ctk.CTkLabel(advanced_frame, text="Search Name").grid(row=9, column=0, padx=5, pady=5)
+        self.search_name_entry = ctk.CTkEntry(advanced_frame)
+        self.search_name_entry.grid(row=9, column=1, padx=5, pady=5)
+        ctk.CTkButton(advanced_frame, text="Search User", command=self.search_user).grid(row=10, column=0, columnspan=2, pady=5)
+
+        self.binary_search_output_text = tk.Text(advanced_frame, height=5, width=50)
+        self.binary_search_output_text.grid(row=11, column=0, columnspan=2, pady=5)
     #
     def add_user(self):
         name = self.name_entry.get()
@@ -199,7 +217,10 @@ class SocialNetworkApp:
 
     
     def show_network_graph(self):
-        self.social_network.draw_graph()
+       users = self.user_manager.get_all_users()
+       for user in users:
+            self.social_network.add_user(user.id, user.name)
+       self.social_network.draw_graph()
 
     
     def bfs(self):
@@ -257,11 +278,11 @@ class SocialNetworkApp:
     def search_user(self):
         name = self.search_name_entry.get()
         user = self.user_manager.binary_search(name)
-        self.search_output_text.delete('1.0', tk.END)
+        self.binary_search_output_text.delete(1.0, tk.END)
         if user:
-            self.search_output_text.insert(tk.END, f"ID: {user.id}, Name: {user.name}, Age: {user.age}, Email: {user.email}\n")
+            self.binary_search_output_text.insert(tk.END, f"User found: {user.name} (ID: {user.id})\n")
         else:
-            self.search_output_text.insert(tk.END, "User not found.")
+            self.binary_search_output_text.insert(tk.END, "User not found.\n")
 
     
     def calculate_average_age(self):
