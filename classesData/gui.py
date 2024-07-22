@@ -23,29 +23,29 @@ class SocialNetworkApp:
 
        
          # User Section
-        ctk.CTkLabel(self.frame, text="Name").grid(row=0, column=0, padx=5, pady=5)
+        ctk.CTkLabel(self.frame, text="Name:").grid(row=0, column=0, padx=5, pady=5)
         self.name_entry = ctk.CTkEntry(self.frame)
         self.name_entry.grid(row=0, column=1, padx=5, pady=5)
 
-        ctk.CTkLabel(self.frame, text="Age").grid(row=1, column=0, padx=5, pady=5)
+        ctk.CTkLabel(self.frame, text="Age:").grid(row=1, column=0, padx=5, pady=5)
         self.age_entry = ctk.CTkEntry(self.frame)
         self.age_entry.grid(row=1, column=1, padx=5, pady=5)
 
-        ctk.CTkLabel(self.frame, text="Email").grid(row=2, column=0, padx=5, pady=5)
+        ctk.CTkLabel(self.frame, text="Email:").grid(row=2, column=0, padx=5, pady=5)
         self.email_entry = ctk.CTkEntry(self.frame)
         self.email_entry.grid(row=2, column=1, padx=5, pady=5)
 
         ctk.CTkButton(self.frame, text="Add User", command=self.add_user).grid(row=3, column=0, columnspan=2, pady=5)
 
-        ctk.CTkLabel(self.frame, text="Update User ID").grid(row=4, column=0, padx=5, pady=5)
+        ctk.CTkLabel(self.frame, text="Update User ID:").grid(row=4, column=0, padx=5, pady=5)
         self.update_user_id_entry = ctk.CTkEntry(self.frame)
         self.update_user_id_entry.grid(row=4, column=1, padx=5, pady=5)
 
-        ctk.CTkLabel(self.frame, text="New Name").grid(row=5, column=0, padx=5, pady=5)
+        ctk.CTkLabel(self.frame, text="New Name:").grid(row=5, column=0, padx=5, pady=5)
         self.new_name_entry = ctk.CTkEntry(self.frame)
         self.new_name_entry.grid(row=5, column=1, padx=5, pady=5)
 
-        ctk.CTkLabel(self.frame, text="New Email").grid(row=6, column=0, padx=5, pady=5)
+        ctk.CTkLabel(self.frame, text="New Email:").grid(row=6, column=0, padx=5, pady=5)
         self.new_email_entry = ctk.CTkEntry(self.frame)
         self.new_email_entry.grid(row=6, column=1, padx=5, pady=5)
 
@@ -58,15 +58,15 @@ class SocialNetworkApp:
         ctk.CTkButton(self.frame, text="Delete User", command=self.delete_user).grid(row=9, column=0, columnspan=2, pady=5)
 
         # Friendship Section
-        ctk.CTkLabel(self.frame, text="User ID 1").grid(row=10, column=0)
+        ctk.CTkLabel(self.frame, text="User ID 1:").grid(row=10, column=0)
         self.user_id1_entry = ctk.CTkEntry(self.frame)
         self.user_id1_entry.grid(row=10, column=1)
 
-        ctk.CTkLabel(self.frame, text="User ID 2").grid(row=11, column=0)
+        ctk.CTkLabel(self.frame, text="User ID 2:").grid(row=11, column=0)
         self.user_id2_entry = ctk.CTkEntry(self.frame)
         self.user_id2_entry.grid(row=11, column=1)
 
-        ctk.CTkLabel(self.frame, text="Weight").grid(row=12, column=0)
+        ctk.CTkLabel(self.frame, text="Weight:").grid(row=12, column=0)
         self.weight_entry = ctk.CTkEntry(self.frame)
         self.weight_entry.grid(row=12, column=1)
 
