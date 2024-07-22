@@ -217,6 +217,9 @@ class SocialNetworkApp:
         self.user_manager.quick_sort()
         self.display_users()
 
+
+    
+
     
     def show_network_graph(self):
        users = self.user_manager.get_all_users()

@@ -75,9 +75,13 @@ class UserManager:
         arr[i + 1], arr[high] = arr[high], arr[i + 1]
         return i + 1
     
+    
+
+    
 
     def get_sorted_users_by_name(self):
         return sorted(self.users.values(), key=lambda user: user.name)
+    
 
     def binary_search(self, name):
 

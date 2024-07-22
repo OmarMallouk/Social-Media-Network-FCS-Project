@@ -1,5 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
 from collections import deque
 import heapq
 
@@ -8,6 +9,7 @@ class Graph:
         # Dictionary to store the graph data using adjacency list
         self.adjacency_list = {}  
         self.graph = nx.DiGraph()
+        
         
 
     #adding user and plotting to the graph
