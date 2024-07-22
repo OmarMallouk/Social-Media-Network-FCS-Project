@@ -4,7 +4,7 @@ from classesData.gui import SocialNetworkApp
 
 def main():
     root = ctk.CTk()
-    root.geometry("900x900")
+    root.geometry("800x900")
     app = SocialNetworkApp(root)
     root.mainloop()
 

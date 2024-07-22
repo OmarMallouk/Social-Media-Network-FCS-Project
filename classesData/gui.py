@@ -19,7 +19,7 @@ class SocialNetworkApp:
         ctk.set_default_color_theme("dark-blue")
 
         self.frame = ctk.CTkFrame(root)
-        self.frame.pack(pady=20, padx=20)
+        self.frame.pack(padx=20,pady=20)
 
        
          # User Section
@@ -89,7 +89,7 @@ class SocialNetworkApp:
 
     def open_advanced_window(self):
         self.advanced_window = ctk.CTkToplevel(self.root)
-        self.advanced_window.title("Advanced Functions")
+        self.advanced_window.title("More Functions")
 
         advanced_frame = ctk.CTkFrame(self.advanced_window)
         advanced_frame.pack(pady=20, padx=20)
