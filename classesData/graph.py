@@ -16,6 +16,7 @@ class Graph:
         if user_id not in self.adjacency_list:
             self.adjacency_list[user_id] = {
                 "name": name,
+                "id": user_id,
                 "friends": set()
             }
             self.graph.add_node(user_id, name=name)
@@ -46,7 +47,7 @@ class Graph:
     # draws the graph with vertices 
     def draw_graph(self):
         pos = nx.spring_layout(self.graph)
-        labels = nx.get_node_attributes(self.graph, 'name', 'user_id')
+        labels = {node: f"{data['name']}\nID: {node}" for node, data in self.graph.nodes(data=True)}
         edge_labels = nx.get_edge_attributes(self.graph, 'weight')
         plt.figure(figsize=(8, 6))
         nx.draw(self.graph, pos, with_labels=True, labels=labels, node_size=3000, node_color='skyblue', font_size=10, font_weight='bold', arrows=True)
