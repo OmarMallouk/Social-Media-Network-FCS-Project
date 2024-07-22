@@ -1,0 +1,15 @@
+# Social Network Using Graph, tkinter, networkx, matplolib
+
+# In this app you can add users, update existing users or delete them, add friendships between users and see them visualized on a graph, also there is a variety of implemented algorithms that allow you to: Search-Sort users, DFS,BFS for the best traversal, as well as the best one which the djikstra algorithm 
+
+### Installation Instructions: 
+1-Create a folder on you're desktop
+2-Clone the repository into you're designated folder
+3-After oppening the folder you must instsall the following 2 libraries:
+ pip install networkx
+ pip install matplotlib
+
+4-Run the code after completing the above steps
+
+
+### What will you see once you run it:
