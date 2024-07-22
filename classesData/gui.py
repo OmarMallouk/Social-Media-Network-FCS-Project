@@ -128,6 +128,8 @@ class SocialNetworkApp:
         self.binary_search_output_text = tk.Text(advanced_frame, height=5, width=50)
         self.binary_search_output_text.grid(row=11, column=0, columnspan=2, pady=5)
     #
+
+    
     def add_user(self):
         name = self.name_entry.get()
         age = int(self.age_entry.get())
