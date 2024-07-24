@@ -123,11 +123,9 @@ class SocialNetworkApp:
         ctk.CTkLabel(advanced_frame, text="Search Name").grid(row=9, column=0, padx=5, pady=5)
         self.search_name_entry = ctk.CTkEntry(advanced_frame)
         self.search_name_entry.grid(row=9, column=1, padx=5, pady=5)
-        ctk.CTkButton(advanced_frame, text="Search User", command=self.search_user).grid(row=10, column=0, columnspan=2, pady=5)
-
-        self.binary_search_output_text = tk.Text(advanced_frame, height=5, width=50)
-        self.binary_search_output_text.grid(row=11, column=0, columnspan=2, pady=5)
-    #
+        
+       
+    
 
     
     def add_user(self):
